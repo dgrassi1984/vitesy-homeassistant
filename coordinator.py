@@ -63,9 +63,9 @@ class VitesyCoordinator(DataUpdateCoordinator):
         try:
             devices = await self.hass.async_add_executor_job(self.api.get_devices)
             _LOGGER.debug(f"Devices: {devices}")
-            sensors = []
+            
             for device in devices:
-
+                sensors = []
                 # Get sensors from the last 1 hour in iso format
                 data_in = await self.hass.async_add_executor_job(
                     self.api.query_measurements, device["id"], None, None, None, True
