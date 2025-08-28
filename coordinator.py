@@ -109,5 +109,5 @@ class VitesyCoordinator(DataUpdateCoordinator):
         device = self.get_device_by_id(device_id)
         maintenance_data = device.get('maintenance', {})
         if device and maintenance_data:
-            return  maintenance_data.get('filter')
+            return  maintenance_data.get(sensor_id)
         return None
