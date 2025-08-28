@@ -7,7 +7,8 @@ from homeassistant.core import HomeAssistant
 from .sensor_temperature import FridgeTemperatureSensor
 from .sensor_battery import FridgeBatterySensor
 from .sensor_door import FridgeDoorSensor
-# from .sensor_filter import FridgeFilterSensor
+from .sensor_filter import FridgeFilterSensor
+from .sensor_fridge_cleaning import FridgeCleaningSensor
 from .const import DOMAIN
 from .coordinator import VitesyCoordinator
 
@@ -40,12 +41,11 @@ async def async_setup_entry(
             elif sensor.get('id') == "DOT-SY":
                 sensors.append(FridgeDoorSensor(coordinator, device, sensor))
 
-        """
+        
         maintenance_data = device.get('maintenance', {})
-        for maintenance_type, maintenance_data in maintenance_data.items():
-            if maintenance_type == "filter":
-                sensors.append(FridgeFilterSensor(coordinator, device, maintenance_data))
-        """
+        sensors.append(FridgeFilterSensor(coordinator, device, "filter", maintenance_data.get('filter')))
+        sensors.append(FridgeCleaningSensor(coordinator, device, "fridge", maintenance_data.get('fridge')))
+        
 
     # Create the sensors.
     async_add_entities(sensors)
