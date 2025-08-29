@@ -40,7 +40,9 @@ class FridgeFilterSensor(FridgeMaintenanceSensor):
         # Using native value and native unit of measurement, allows you to change units
         # in Lovelace and HA will automatically calculate the correct value.
         sensorDateString = self.maintenance_data.get('due_date', None)
-        sensorDateTime =datetime.strptime(sensorDateString, "%Y-%m-%dT%H:%M:%S.%fZ")
+        if sensorDateString is None:
+            return -1
+        sensorDateTime = datetime.strptime(sensorDateString, "%Y-%m-%dT%H:%M:%S.%fZ")
         delta = sensorDateTime - datetime.now()
         return max(0, delta.days)
 
