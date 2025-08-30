@@ -103,3 +103,11 @@ class VitesyCoordinator(DataUpdateCoordinator):
                 sensor for sensor in device.get('sensors', []) if sensor.get('id') == sensor_id
             ][0]
         return None
+        
+    def get_maintenance_data_by_id(self, device_id: str, sensor_id: str):
+        """Return maintenance_data by maintenance_data id."""
+        device = self.get_device_by_id(device_id)
+        maintenance_data = device.get('maintenance', {})
+        if device and maintenance_data:
+            return maintenance_data.get(sensor_id)
+        return None

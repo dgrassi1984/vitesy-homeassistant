@@ -36,6 +36,8 @@ This integration allows you to integrate your Vitesy air purifiers with Home Ass
 - Temperature
 - Battery Level
 - Door Openings
+- Days Until Fridge Cleaning Required
+- Days Until Filter Cleaning Required
 
 ## API Key
 

@@ -17,7 +17,7 @@ _LOGGER = logging.getLogger(__name__)
 
 from datetime import datetime
 
-class FridgeFilterSensor(FridgeMaintenanceSensor):
+class FridgeCleaningSensor(FridgeMaintenanceSensor):
 
     @property
     def device_class(self) -> str:
@@ -28,7 +28,7 @@ class FridgeFilterSensor(FridgeMaintenanceSensor):
     @property
     def name(self) -> str:
         """Return the name of the sensor."""
-        return f"DaysUntilFilterCleanRequired{self.device_id}-{self.maintenance_data_id}"
+        return f"DaysUntilFridgeCleanRequired{self.device_id}-{self.maintenance_data_id}"
 
     @property
     def native_unit_of_measurement(self) -> str | None:
